@@ -4,5 +4,4 @@ This research project aimed to reduce the amount of time developers spend debugg
 
 1.Connect to a target debuggee via three means: 
 ..1. Launch  
-...1. The connection specifics are gathered through the UI and the target debugger’s compiled file is then selected by a file picker    
-
+...1. The connection specifics are gathered through the UI and the target debugger’s compiled file is then selected by a file picker  
