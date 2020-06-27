@@ -44,10 +44,4 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
 |              |   XMLScriptReader.java   |
 | xmlLayouts   |  connectionLayout.fxml   |
 |              |     mainLayout.fxml      |
-
-
-
-
-
-
-              java  .java .java        
+      
