@@ -44,4 +44,15 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
 |              |   XMLScriptReader.java   |
 | xmlLayouts   |  connectionLayout.fxml   |
 |              |     mainLayout.fxml      |
-      
+
+Two solutions are available for the JavaFX libraries for both aspects of the installation. The quickest solution is to use Java 8 as the version to execute or develop the debugger, because the necessary JavaFX libraries the debugger is dependent on are included as standard, requiring no additional alterations. 
+
+The second solutions allow for any Java version to be used but requires that the external libraries are included in the launching arguments or build path for development. The JavaFX libraries can be downloaded separately and attached a long side any JDK version. The external tools.jar is only necessary for future development as it is already included in the executable version of the debugger, as the tools.jar file was explicitly included in the creation of the jar file. For future development the tools.jar file is only accessible through the JDK and Not JRE. It can be found in the ‘JDKDirectory/lib/tools.jar.  
+
+## Links
+
+* Java 8
+  ** https://www.oracle.com/java/technologies/javase-jdk8-downloads.html 
+* JavaFX
+  ** https://openjfx.io/ 
+
