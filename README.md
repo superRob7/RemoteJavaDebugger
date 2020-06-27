@@ -4,11 +4,11 @@ This research project aimed to reduce the amount of time developers spend debugg
  
 * Connect to a target debuggee via three means: 
   * Launch  
-   * The connection specifics are gathered through the UI and the target debugger’s compiled file is then selected by a file picker 
+     * The connection specifics are gathered through the UI and the target debugger’s compiled file is then selected by a file picker 
   * Socket Attach 
-   * The connection specifics are gathered through the UI and used to attempt the remote connection 
+     * The connection specifics are gathered through the UI and used to attempt the remote connection 
   * Socket Listen 
-   * The connection specifics are gathered through the UI and used to attempt the remote connection 
+     * The connection specifics are gathered through the UI and used to attempt the remote connection 
 * View source code line numbers to assist script development 
 * Upload XML Script files via a file picker 
 * Execute script commands 
