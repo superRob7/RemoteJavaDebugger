@@ -17,11 +17,11 @@ The premise of the prototype is to encapsulate the best available debugging meth
 
 Fundamentally, the prototype can be broken down into independent sections that collectively encapsulate the debugger. The first section is communication, which lays the foundation for any debugging session as both parties must be able to communicate in order for information to be gathered. Secondly are script details, as the debugger must be able to internally comprehend the actions specified by the user’s script. Lastly is execution control, which is the capability to apply scripted command to the correct time of execution and ensure that consistent and reliable reads are taken from the debuggee.  
 
-#Quick Installation Guide
+# Quick Installation Guide
 The prototype is dependent on the JavaFX libraries which are no longer part of the standard Java JDK. For the debugger to be launched or for future development these libraries are fundamental. The debugger is also heavily dependent on the external ‘tools.jar’ library that facilitates the JDI interface.  The packages and classes included are as follows, listed classes are fundamental. 
 
 | Package Name |   Class/Resource Name    |
-| ------------ | :----------------------: |
+| :----------: | :----------------------: |
 | application  |        Main.java         |
 | Connection   |     Connection.java      |
 |              |  ConnectionAttach.java   |
