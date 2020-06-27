@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+   <children>
+      <MenuBar id="menuBar" prefHeight="25.0" prefWidth="925.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Connect">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#reconnect" text="Reconnect" />
+                  <MenuItem mnemonicParsing="false" onAction="#closeConnection" text="Close connection" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="925.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab id="tabMethods" text="Information">
+               <content>
+                  <SplitPane dividerPositions="0.5027027027027027" prefHeight="160.0" prefWidth="200.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Button id="btnInto" fx:id="intoBtn" layoutX="186.0" layoutY="267.0" mnemonicParsing="false" onAction="#displayObjectLineNumbers" text="Line Numbers" />
+                              <TextArea id="textAreaOut" fx:id="actionArea" editable="false" layoutX="13.0" layoutY="46.0" prefHeight="158.0" prefWidth="419.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="268.0">
+                           <children>
+                              <TextArea id="textAreaOut" fx:id="infoArea" editable="false" layoutX="16.0" layoutY="36.0" prefHeight="429.0" prefWidth="424.0" />
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </content>
+            </Tab>
+            <Tab text="Scripts">
+               <content>
+                  <SplitPane dividerPositions="0.44216216216216214" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                      <AnchorPane fx:id="scriptLeftPane" minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="355.0">
+                           <children>
+                              <Button fx:id="uploadBtn" layoutX="190.0" layoutY="221.0" mnemonicParsing="false" onAction="#uploadScript" text="Upload" />
+                              <Button fx:id="runBtn" layoutX="242.0" layoutY="324.0" mnemonicParsing="false" onAction="#runScript" text="Run" />
+                              <Button fx:id="clearBtn" layoutX="138.0" layoutY="324.0" mnemonicParsing="false" onAction="#clearScript" text="Clear" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TextArea fx:id="scriptArea" layoutX="22.0" layoutY="23.0" prefHeight="473.0" prefWidth="451.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

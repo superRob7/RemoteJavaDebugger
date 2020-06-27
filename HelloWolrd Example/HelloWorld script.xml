@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	 <breakPoint>
+		<lineNumber>28</lineNumber>
+		<lineNumber>38</lineNumber>
+		<lineNumber>59</lineNumber> 
+		<variableName>shouldWait</variableName>
+		<variableName>x</variableName>
+		<variableName>helloObject</variableName>
+		<variableName>s</variableName>
+	</breakPoint>	
+</script>

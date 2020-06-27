@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<HBox fx:id="hBoxPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ConnectionController">
+   <children>
+      <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="222.0">
+         <children>
+            <RadioButton fx:id="attachRadio" layoutX="33.0" layoutY="255.0" mnemonicParsing="false" onAction="#getSelectedConnectionType" prefHeight="17.0" prefWidth="137.0" text="Remote Connection">
+               <toggleGroup>
+                  <ToggleGroup fx:id="connection" />
+               </toggleGroup></RadioButton>
+            <RadioButton id="launchRadio" fx:id="launchRadio" layoutX="33.0" layoutY="158.0" mnemonicParsing="false" onAction="#getSelectedConnectionType" prefHeight="17.0" prefWidth="137.0" text="Local Connection" toggleGroup="$connection" />
+            <Text layoutX="46.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection type" />
+            <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="799.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Options">
+                  <items>
+                        <Menu mnemonicParsing="false" text="Log options">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#changeLogLocation" text="Log location" />
+                          <MenuItem mnemonicParsing="false" onAction="#changeLogLevel" text="Log level" />
+                          </items>
+                        </Menu>
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </Pane>
+      <Pane fx:id="centerPane" prefHeight="400.0" prefWidth="263.0">
+         <children>
+            <Text layoutX="54.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Details" />
+            <TextField fx:id="portInput" layoutX="55.0" layoutY="150.0" prefHeight="16.0" prefWidth="98.0" promptText="Port number" />
+            <Button fx:id="btnConnect" layoutX="74.0" layoutY="275.0" mnemonicParsing="false" onAction="#connect" text="Connect" />
+            <RadioButton fx:id="serverToggle" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#getSelectedToggles" prefHeight="17.0" prefWidth="60.0" text="Server" />
+            <RadioButton fx:id="suspendToggle" layoutX="123.0" layoutY="200.0" mnemonicParsing="false" onAction="#getSelectedToggles" text="Suspend" />
+            <TextField fx:id="hostInput" layoutX="55.0" layoutY="100.0" prefHeight="16.0" prefWidth="98.0" promptText="Host / IP" />
+         </children>
+      </Pane>
+      <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="255.0">
+         <children>
+            <Text layoutX="40.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Info" wrappingWidth="87.146484375" />
+            <TextArea fx:id="connectInfoArea" layoutX="-2.0" layoutY="100.0" prefHeight="199.0" prefWidth="307.0" />
+         </children>
+      </Pane>
+   </children>
+</HBox>
