@@ -1,6 +1,6 @@
 # Remote Java Debugger
 
-This research project aimed to reduce the amount of time developers spend debugging their applications, by facilitating the ability for custom-built diagnostic scripts to automate the debugging process, locally or remotely.  Upon conclusion of the project, the finalised prototype offers the ability to:
+The premise of the prototype is to encapsulate the best available debugging methods and techniques into one tool. The prototype aims to harness the power and functionality of an IDE debugger, without requiring modification of the source code as well as eradicating irrelevant and unnecessary information, cluttering the user-interface. Essentially creating a hybrid debugging technique. Upon conclusion of the project, the finalised prototype offers the ability to:
  
 * Connect to a target debuggee via three means: 
   * Launch  
