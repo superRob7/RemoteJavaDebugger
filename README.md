@@ -52,7 +52,7 @@ The second solutions allow for any Java version to be used but requires that the
 ## Links
 
 * Java 8
-  * (https://www.oracle.com/java/technologies/javase-jdk8-downloads.html) 
+  * https://www.oracle.com/java/technologies/javase-jdk8-downloads.html 
 * JavaFX
-  * (https://openjfx.io/)
+  * https://openjfx.io/
 
