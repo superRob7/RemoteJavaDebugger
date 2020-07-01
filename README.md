@@ -66,16 +66,18 @@ During a remote debugging session, one party must be the 'server' and the other 
 A listening connection is the opposite of the attaching connector, this time the debugger is the server. Which requires the debuggee (target program) to connect to the socket the debugger is listening at for a connection. Once the connection is established the debugger can control the execution of the debuggee. 
 
 ## Local Connection 
-When the debugger is launched it will automatically select the 'Local Connection' type from the 'Connection type' section. Insure the ‘Suspend’ toggle is selected from the connection details. The click the 'Connect' button, this will prompts a file picker allowing you to select the '**.class**' any where on the local machine.
+When the debugger is launched it will automatically select the 'Local Connection' type from the 'Connection type' section. Insure the ‘Suspend’ toggle is selected from the connection details. The click the 'Connect' button, this will prompts a file picker allowing you to select the '**.class**' any where on the local machine. Once a the class file has been selected the connection will be attempted, a successful connection will cause the UI to load a new page.
 
 ## Attaching Connection
-Select the 'Remote Connection' toggle from the 'Connection Type' section. This causes the UI to allow you to enter the IP address of the target, the port number identifys the socket that will be used to asstablish the connection
+Select the 'Remote Connection' toggle from the 'Connection Type' section. This causes the UI to allow you to enter the IP address of the target and the port number, which identify the socket that will be used to establish the connection. When using an attaching connection as stated previously the debuggee is the server hosting the debugging session, meaning that it must be up and waiting before the debugger attempts to make the connection. To do this run the 'attach.bat' file and changing the 'HelloWorld' to the name of the target class. This file does not need to be executed but the command it contains **must** be executed. Do **not** select the 'server' when attempting this time of connection as this connection is reliant on the target hosting the session. Then click the connect button, a successful connection will cause the UI to load a new page.
 
 ## Listening Connection
+Select the 'Remote Connection' toggle from the 'Connection Type' section. Then insure the 'server' toggle **is** selected, causing the UI to only allowing you to enter the port number. The IP input is uneatable as the debugger automatically uses the address of the local machine. The press the 'Connect' button. Once the button has been clicked the debugger will listen for a connection at the specified port. For the connection to be established the command contended within the 'listen.bat. file must be executed within a set period, if the debugger does not reserve a connection within the time limit then the connection will fail and you will have to reattempt the connection, a successful connection will cause the UI to load a new page..   
 
+# Uploading A Script
+Once a connection has been successful established, the debugger option are available to you. Navigate to the script panel, from this panal a XML script can be upladed to the debugger
 
 ## Links
-
 * Java 8
   * https://www.oracle.com/java/technologies/javase-jdk8-downloads.html 
 * JavaFX
