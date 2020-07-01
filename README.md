@@ -47,7 +47,16 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
 
 Two solutions are available for the JavaFX libraries for both aspects of the installation. The quickest solution is to use Java 8 as the version to execute or develop the debugger, because the necessary JavaFX libraries the debugger is dependent on are included as standard, requiring no additional alterations. 
 
-The second solutions allow for any Java version to be used but requires that the external libraries are included in the launching arguments or build path for development. The JavaFX libraries can be downloaded separately and attached a long side any JDK version. The external tools.jar is only necessary for future development as it is already included in the executable version of the debugger, as the tools.jar file was explicitly included in the creation of the jar file. For future development the tools.jar file is only accessible through the JDK and Not JRE. It can be found in the ‘JDKDirectory/lib/tools.jar.  
+The second solutions allow for any Java version to be used but requires that the external libraries are included in the launching arguments or build path for development. The JavaFX libraries can be downloaded separately and attached a long side any JDK version. The external tools.jar is only necessary for future development as it is already included in the executable version of the debugger, as the tools.jar file was explicitly included in the creation of the jar file. For future development the tools.jar file is only accessible through the JDK and Not JRE. It can be found in the ‘JDKDirectory/lib/tools.jar. 
+
+# Getting Started
+The scripted debugger can be executed as a stand alone application by executing the 'Debugger.jar' file found in the 'HelloWorld Example' folder. To continue development the 'Debugger' folder holds the source code, if you are not using Java 8 then you must add the JavaFX libraries to the build path of the project. 
+
+For the debugger to be able to control the execution of the debuggee, you must compile the target with debugging information enabled. To insure this information is generated the '-g' command must be included within the compiler command. For example the following command would be executed within the file directory of the target program:
+  * javac -g HelloWorld.java
+
+
+
 
 ## Links
 
