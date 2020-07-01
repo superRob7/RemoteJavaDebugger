@@ -55,7 +55,23 @@ The scripted debugger can be executed as a stand alone application by executing 
 For the debugger to be able to control the execution of the debuggee, you must compile the target with debugging information enabled. To insure this information is generated the '-g' command must be included within the compiler command. For example the following command would be executed within the file directory of the target program:
   * javac -g HelloWorld.java
 
+# Connecting To A Target
+A connection can be established in 3 ways:
+* Local 
+* Socket Attach
+* Socket Listen
 
+During a remote debugging session, one party must be the 'server' and the other the clint. These action are used to establish the connection between the debugger and debuggee (target program). When performing an attaching connection the debuggee **IS** the server. Meaning that this program will wait of the debugger to attach to the specified socket before executing. An example of the command used to launch the debugger in this state can be found in the 'attach.bat' file. 
+
+A listening connection is the opposite of the attaching connector, this time the debugger is the server. Which requires the debuggee (target program) to connect to the socket the debugger is listening at for a connection. Once the connection is established the debugger can control the execution of the debuggee. 
+
+## Local Connection 
+When the debugger is launched it will automatically select the 'Local Connection' type from the 'Connection type' section. Insure the ‘Suspend’ toggle is selected from the connection details. The click the 'Connect' button, this will prompts a file picker allowing you to select the '**.class**' any where on the local machine.
+
+## Attaching Connection
+Select the 'Remote Connection' toggle from the 'Connection Type' section. This causes the UI to allow you to enter the IP address of the target, the port number identifys the socket that will be used to asstablish the connection
+
+## Listening Connection
 
 
 ## Links
