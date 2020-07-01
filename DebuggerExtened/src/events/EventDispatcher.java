@@ -1,5 +1,6 @@
 package events;
 
+import com.sun.jdi.ReferenceType;
 import com.sun.jdi.VMDisconnectedException;
 import com.sun.jdi.event.BreakpointEvent;
 import com.sun.jdi.event.ClassPrepareEvent;
@@ -198,6 +199,10 @@ public class EventDispatcher extends Thread {
 		if (event instanceof ClassPrepareEvent) {
 			debuggee.getLogger().logDebuggerInfo("Class loaded, ClassPrepareEvent triggered, setting Breakpoints");
 
+			ReferenceType classRef = ((ClassPrepareEvent) event).referenceType();
+			
+			System.out.println("This is the name of the classprepareEvent = " + classRef );
+			
 			if (script == null) {
 				eventHandler.getClassLineNumber(event);
 				classLineNumFlag = true;

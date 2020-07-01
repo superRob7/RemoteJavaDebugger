@@ -1,8 +1,14 @@
 package script;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 public class BreakPoint {
 	
-	private String methodName, className, variableName;
+	private String methodName, className;
+	private List<String> variables;
 	
 	private int lineNumber;
 	
@@ -10,28 +16,7 @@ public class BreakPoint {
 	{
 		this.lineNumber = lineNumber;
 	}
-	
-	/**
-	 * Constuctor for breakpoint object
-	 * @param name : The name of the class or method (String)
-	 * @param identifier : To identified if the name suplided is the class or method name
-	 */
-	public BreakPoint(String name, int identifier)
-	{
-		if(identifier == 1)
-		{
-			methodName = name;
-		}
-		else if (identifier == 2)
-		{
-			className = name;
-		}
-		else if (identifier == 3)
-		{
-			variableName = name;
-		}
-		
-	}
+
 	
 	public BreakPoint()
 	{
@@ -72,14 +57,14 @@ public class BreakPoint {
 		return "Line number = " + this.getLineNumbers() + " " + "Method name = " + this.getMethodName() + " " + "Class Name = " + this.getClassName() + " " + "Variable name = " + this.getVariableName();
 	}
 
-	public String getVariableName()
+	public List<String> getVariableName()
 	{
-		return variableName;
+		return variables;
 	}
 
-	public void setVariableName(String variableName)
+	public void setVariableName(Collection<String> collection)
 	{
-		this.variableName = variableName;
+		 this.variables = new ArrayList<String>(collection);
 	}
 	
 
