@@ -52,7 +52,7 @@ The second solutions allow for any Java version to be used but requires that the
 # Getting Started
 The scripted debugger can be executed as a stand alone application by executing the 'Debugger.jar' file found in the 'HelloWorld Example' folder. To continue development the 'Debugger' folder holds the source code, if you are not using Java 8 then you must add the JavaFX libraries to the build path of the project. 
 
-For the debugger to be able to control the execution of the debuggee, you must compile the target with debugging information enabled. To insure this information is generated the '-g' command must be included within the compiler command. For example the following command would be executed within the file directory of the target program:
+For the debugger to be able to control the execution of the debuggee, you must compile the target with debugging information enabled. To insure this information is generated the '-g' command must be included within the compiler command to the class that contains the 'main' method. For example the following command would be executed within the file directory of the target program:
   * javac -g HelloWorld.java
 
 # Connecting To A Target
@@ -75,7 +75,7 @@ Select the 'Remote Connection' toggle from the 'Connection Type' section. This c
 Select the 'Remote Connection' toggle from the 'Connection Type' section. Then insure the 'server' toggle **is** selected, causing the UI to only allowing you to enter the port number. The IP input is uneatable as the debugger automatically uses the address of the local machine. The press the 'Connect' button. Once the button has been clicked the debugger will listen for a connection at the specified port. For the connection to be established the command contended within the 'listen.bat. file must be executed within a set period, if the debugger does not reserve a connection within the time limit then the connection will fail and you will have to reattempt the connection, a successful connection will cause the UI to load a new page..   
 
 # Uploading A Script
-Once a connection has been successful established, the debugger option are available to you. Navigate to the script panel, from this panal a XML script can be upladed to the debugger
+Once a connection has been successful established, the debugger option are available to you. Navigate to the script panel, from this panel an  XML script can be uploaded to the debugger vie the file picker that is prompted when the 'Upload' button is clicked. The file must be of any XML extension and must include the name of the class to add the breakpoint as well as one line number for the breakpoint to be applied to. An example of the required script structure can be found within the 'HelloWorldScript.xml' file.
 
 ## Links
 * Java 8
