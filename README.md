@@ -1,8 +1,12 @@
-1. [Remote Java Debugger]
-2. [Quick Installation Guide]
-3. [Getting Started]
-4. [Connecting To A Target]
-5. [Uploading A Script]
+- [Remote Java Debugger](#remote-java-debugger)
+- [Quick Installation Guide](#quick-installation-guide)
+- [Getting Started](#getting-started)
+- [Connecting To A Target](#connecting-to-a-target)
+  - [Local Connection](#local-connection)
+  - [Attaching Connection](#attaching-connection)
+  - [Listening Connection](#listening-connection)
+- [Uploading A Script](#uploading-a-script)
+  - [Links](#links)
 
 # Remote Java Debugger
 
