@@ -32,8 +32,7 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
 <table>
   <tbody>
     <tr>
-      <th align="center">Package Name</th>
-      <th align="center">Class/Resource Name</th>
+      <th align="center">Package Name
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -42,6 +41,8 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>    
         <span>&nbsp;&nbsp;</span>
+        </th>
+         <th align="center">Class/Resource Name</th>
    </tr>
    <tr>
       <td align="center">Main.java<br>
