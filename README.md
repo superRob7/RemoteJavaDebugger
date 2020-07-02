@@ -1,3 +1,5 @@
+# Table of Contents 
+- [Table of Contents](#table-of-contents)
 - [Remote Java Debugger](#remote-java-debugger)
 - [Quick Installation Guide](#quick-installation-guide)
 - [Getting Started](#getting-started)
