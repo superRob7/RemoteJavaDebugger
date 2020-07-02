@@ -1,6 +1,4 @@
-# Table of Contents 
-- [Table of Contents](#table-of-contents)
-- [Remote Java Debugger](#remote-java-debugger)
+- [Overview](#overview)
 - [Quick Installation Guide](#quick-installation-guide)
 - [Getting Started](#getting-started)
 - [Connecting To A Target](#connecting-to-a-target)
@@ -8,12 +6,11 @@
   - [Attaching Connection](#attaching-connection)
   - [Listening Connection](#listening-connection)
 - [Uploading A Script](#uploading-a-script)
-  - [Links](#links)
+- [Links](#links)
 
-# Remote Java Debugger
-
+# Overview 
 The premise of the prototype is to encapsulate the best available debugging methods and techniques into one tool. The prototype aims to harness the power and functionality of an IDE debugger, without requiring modification of the source code as well as eradicating irrelevant and unnecessary information, cluttering the user-interface. Essentially creating a hybrid debugging technique. Upon conclusion of the project, the finalised prototype offers the ability to:
- 
+
 * Connect to a target debuggee via three means: 
   * Launch  
      * The connection specifics are gathered through the UI and the target debugger’s compiled file is then selected by a file picker 
@@ -89,7 +86,7 @@ Select the 'Remote Connection' toggle from the 'Connection Type' section. Then i
 # Uploading A Script
 Once a connection has been successful established, the debugger option are available to you. Navigate to the script panel, from this panel an  XML script can be uploaded to the debugger vie the file picker that is prompted when the 'Upload' button is clicked. The file must be of any XML extension and must include the name of the class to add the breakpoint as well as one line number for the breakpoint to be applied to. An example of the required script structure can be found within the 'HelloWorldScript.xml' file.
 
-## Links
+# Links
 * Java 8
   * https://www.oracle.com/java/technologies/javase-jdk8-downloads.html 
 * JavaFX
