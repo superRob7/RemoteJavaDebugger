@@ -33,7 +33,7 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
   <tbody>
     <tr>
       <th align="center">Package Name<br>
-       <th align="center">Class/Resource Name<br>
+      <th align="center">Class/Resource Name<br>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -42,6 +42,8 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>    
         <span>&nbsp;&nbsp;</span>
       </th>
+   </tr>
+   <tr>
       <td align="center">Main.java<br>
       <td align="center"> Connection.java<br></td>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -51,17 +53,7 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>     
-        <span>&nbsp;&nbsp;</span>        
-      </td>
-       <td align="center"> Connection.java<br>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>    
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>     
-        <span>&nbsp;&nbsp;</span>        
+        <span>&nbsp;&nbsp;</span>            
       </td>
     </tr>
   </tbody>
@@ -70,26 +62,26 @@ The prototype is dependent on the JavaFX libraries which are no longer part of t
 | Package Name |   Class/Resource Name    |
 | :----------: | :----------------------: |
 | application  |        Main.java         |
-| Connection   |     Connection.java      |
+|  Connection  |     Connection.java      |
 |              |  ConnectionAttach.java   |
 |              |  ConnectionLaunch.java   |
 |              |  ConnectionListen.java   |
 |              |  ConnectionManager.java  |
 | Controllers  | ConnectionContoller.java |
 |              |   MainController.java    |
-| Debuggee     |      Debuggee.java       |
-| Events       |   EventDispatcher.java   |
+|   Debuggee   |      Debuggee.java       |
+|    Events    |   EventDispatcher.java   |
 |              |    EventHandler.java     |
-| Functions    |  ConnectionBundle.java   |
+|  Functions   |  ConnectionBundle.java   |
 |              |   ConnectionEnums.java   |
 |              | DebuggingStageEnums.java |
 |              | InformationBuilder.java  |
 |              |         Log.java         |
 |              |  UserNotification.java   |
-| script       |     BreakPoint.java      |
+|    script    |     BreakPoint.java      |
 |              |       Script.java        |
 |              |   XMLScriptReader.java   |
-| xmlLayouts   |  connectionLayout.fxml   |
+|  xmlLayouts  |  connectionLayout.fxml   |
 |              |     mainLayout.fxml      |
 
 Two solutions are available for the JavaFX libraries for both aspects of the installation. The quickest solution is to use Java 8 as the version to execute or develop the debugger, because the necessary JavaFX libraries the debugger is dependent on are included as standard, requiring no additional alterations. 
