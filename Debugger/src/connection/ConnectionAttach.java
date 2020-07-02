@@ -50,6 +50,7 @@ public class ConnectionAttach extends Connection{
 		// Get the connector arguments
 		Map<String, Connector.Argument> argument = getArguments(connector);
 
+		// Attempting the attaching connection
 		try {
 			debuggeeMachine = connector.attach(argument);
 			
@@ -57,10 +58,16 @@ public class ConnectionAttach extends Connection{
 			
 			e.printStackTrace();
 		}
+		
+		// Checking if the VM has been attached
 		if (debuggeeMachine != null) {
 			return debuggeeMachine;
 		}
+		
+		//Dev output
 		System.out.println("Target VM is null");
+		
+		//Defualt returning argument
 		return null;
 	}
 
