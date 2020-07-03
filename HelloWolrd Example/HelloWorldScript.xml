@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<breakPoint className="HelloWorld">
+		<variableName>x</variableName>
+	
+		<variableName>shouldWait</variableName>
+		<lineNumber>13</lineNumber>
+		<lineNumber>16</lineNumber>
+		<lineNumber>17</lineNumber>
+	</breakPoint>	
+
+	<breakPoint className="main">
+		<variableName>mainX</variableName>
+		<variableName>mainS</variableName>
+		<variableName>helloWorldObject</variableName>
+		<variableName>variableIsAField</variableName>
+		<lineNumber>19</lineNumber>
+	</breakPoint>	
+	
+</script>
