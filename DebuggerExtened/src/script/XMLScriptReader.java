@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -119,14 +120,23 @@ public class XMLScriptReader {
 
 	private void setBreakpoints(NodeList breakPointList) {
 		
-		ArrayList<Integer> lineNumbers = new ArrayList<Integer>();
+		Map<String, BreakPoint> breakpoints = new HashMap<String,BreakPoint>();
 		ArrayList<String> varNames =  new ArrayList<String>();
+		ArrayList<Integer> lineNumber =  new ArrayList<Integer>();
+		String className;
+		
 		
 		for (int i = 0; i < breakPointList.getLength(); i++) 
 		{
+			breakpoints.clear();
+			varNames.clear();
+			className=null;
+			
 				Node currentNode = breakPointList.item(i);
 				if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) currentNode;
+					
+					 className = element.getAttribute("className");
 
 					NodeList breakPointInfo = element.getChildNodes();
 		
@@ -139,7 +149,7 @@ public class XMLScriptReader {
 							switch(childElemt.getNodeName())
 							{
 								case "lineNumber" : 
-									lineNumbers.add((Integer.valueOf(childElemt.getTextContent())));							
+									script.setBreakPoints(new BreakPoint(Integer.valueOf(childElemt.getTextContent()), className));						
 									break;
 								case "variableName":
 									varNames.add(childElemt.getTextContent());
@@ -148,33 +158,30 @@ public class XMLScriptReader {
 									System.out.println("Invalid tag");
 									break;
 							}
-							
-	
 					}
+						
 				}
+					
+					for (BreakPoint bp : script.getBreakPoints())
+					{
+						if (bp.getClassName().equals(className))
+						{
+							bp.setVariableName(varNames);
+						}
+					}
+					
 			}
 		
 		}
 		
-		if (lineNumbers.size() > 0)
+
+		for (BreakPoint bp : script.getBreakPoints())
 		{
+			System.out.println("\n");
+			
+			System.out.println("BreakPoint line = " + bp.getLineNumbers()  + " | "  + " ClassName = " + bp.getClassName()  + " | " + " Variables = " + bp.getVariableName());
+		}
 		
-			for (Integer line : lineNumbers)
-			{
-				script.setBreakPoints( new BreakPoint(line));
-			}
-			
-			script.setWatchVariables(varNames);
-			
-			for (String var : script.getWatchVariables() )
-			{
-				System.out.println(var);
-			}
-		}
-		else
-		{
-			System.out.println("You must supply a line number to set a breakpoint.");
-		}
 		
 	}
 }

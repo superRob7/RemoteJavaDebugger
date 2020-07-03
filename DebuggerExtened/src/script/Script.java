@@ -35,6 +35,33 @@ public class Script {
 		this.watchVariables = watchVariables;
 	}
 
+	public BreakPoint getBreakpointByLineNumber(String line)
+	{
+		int lineNumber = Integer.valueOf(line);
+		
+		for (BreakPoint bp : breakPoints)
+		{
+			if (bp.getLineNumbers() == lineNumber)
+			{
+				return bp;
+			}
+		}
+		
+		return null;
+		
+	}
 	
+	public BreakPoint getBreakpointByLineNumber(int line)
+	{
+		for (BreakPoint bp : breakPoints)
+		{
+			if (bp.getLineNumbers() == line)
+			{
+				return bp;
+			}
+		}
+		return null;
+		
+	}
 	
 }
