@@ -91,8 +91,7 @@ public class EventDispatcher extends Thread {
 	 */
 	private void startDispatching() {
 		
-		eventHandler = new EventHandler(debuggee, conInfo);
-		
+		eventHandler = new EventHandler(debuggee);
 		if (this.script != null) {
 			eventHandler.setScript(script);
 			scriptFlag = true;
@@ -102,7 +101,7 @@ public class EventDispatcher extends Thread {
 
 	private void getClassLineNumber() {
 		
-		eventHandler = new EventHandler(debuggee, conInfo);
+		eventHandler = new EventHandler(debuggee);
 		trackEvents();
 	}
 

@@ -27,7 +27,6 @@ import com.sun.jdi.request.ClassPrepareRequest;
 import com.sun.jdi.request.EventRequest;
 
 import debuggee.Debuggee;
-import functions.ConnectionBundle;
 import script.BreakPoint;
 import script.Script;
 
@@ -39,47 +38,70 @@ import script.Script;
  */
 public class EventHandler extends Thread {
 
+	/** Internal copy debuggee class */
 	private Debuggee debuggee;
 
-	private ConnectionBundle conInfo;
 
+	/** Internal copy of the uploaded script file */
 	private Script script;
 
-	public EventHandler(Debuggee debuggee, ConnectionBundle conInfo) {
+	/** Constructor, created when dispatching begins, as well as when gathering line numbers */
+	public EventHandler(Debuggee debuggee) {
 		this.debuggee = debuggee;
-		this.conInfo = conInfo;
 	}
 
-	
+	/** 
+	 * Called when handling incoming event  
+	 * @param event : The incoming event cause by the debugger
+	 */
 	public void checkVariables(Event event)
 	{
+		// A local copy of the jdi Event Request class
 		EventRequest request = event.request();
+		
+		// The line number the request came from
 		String line = (String) request.getProperty("location");
 		
+		// Getting the breakpoint from the script object with the same line location as the request 
 		BreakPoint currentBreakPoint = script.getBreakpointByLineNumber(line);
 		
 		System.out.println("Current brakepoint, class = " + currentBreakPoint.getClassName() + " Line number = " + currentBreakPoint.getLineNumbers());
 		
-		searchFields(event, currentBreakPoint);
+		// Search for fields and vars
+		searchFields(request, currentBreakPoint);
 		searchVars(event, currentBreakPoint);
 		
 	}
 	
 
-	private void searchFields(Event event, BreakPoint currentBreakPoint) {
+	/**
+	 * Searches the visible fields at the location of the request. 
+	 * @param EventRequest : The EventRequest object, cause by the debugger
+	 * @param currentBreakPoint : The breakpoint object that has the same line location
+	 */
+	private void searchFields(EventRequest request, BreakPoint currentBreakPoint) {
 		
-		EventRequest request = event.request();
+		System.out.println("inside searchfields");
+		
 		String line = (String) request.getProperty("location");
-
+		
 		ReferenceType refType;
 		Value currentFieldVal;
 
+		// Getting all of the visible fields to that breakpoint request (The request is of type breakpoint)
 		List<Field> fieldList = ((BreakpointRequest) request).location().declaringType().allFields();
 
 		for (Field currentField : fieldList) {
+			
+			// Checking if the field is statice and it is listed within the breakpoint script object
 			if (currentField.isStatic() & currentBreakPoint.getVariableName().contains(currentField.name())) {
+				// Getting the type of the field
 				refType = currentField.declaringType();
+				
+				//Getting the value of the field and storing it in a Value object
 				currentFieldVal = refType.getValue(currentField);
+				
+				// Log info to debuggee log file thought local copy of the debuggee object
 				debuggee.getLogger().logDebuggeeInfo("Variable Name = " + currentField.name() + " " + "Value = "
 						+ currentFieldVal + " Class:  " + currentBreakPoint.getClassName() + " Line: " + line);
 				
@@ -89,57 +111,35 @@ public class EventHandler extends Thread {
 				System.out.println(currentField.name() + " Is not static variable. (Instance variable)");
 			}
 		}
-//		
-//		EventRequest request = event.request();
-//
-//		ReferenceType refType;
-//		Value currentFieldVal;
-//
-//		List<Field> fieldList = ((BreakpointRequest) request).location().declaringType().allFields();
-//
-//		for (Field currentField : fieldList) {
-//			if (!currentField.isStatic())
-//			{
-//				
-//				ObjectReference objRef = stackFrame.thisObject();
-//				ReferenceType refType = objRef.referenceType();
-//				List<Field> objFields = refType.allFields();
-//				for (int i=0; i<objFields.size(); i++)
-//				{
-//				  Field nextField = objFields.get(i);
-//				  if (nextField.name().equals(varName))
-//				  {
-//				    Value targetVal = objRef.getValue(nextField);
-//				  }
-//				}
-//				
-//				
-//			}
-//			else
-//			{
-//				refType = currentField.declaringType();
-//				currentFieldVal = refType.getValue(currentField);
-//				debuggee.getLogger().logDebuggeeInfo("Variable Name = " + currentField.name() + " " + "Value = "
-//						+ currentFieldVal + " Line: " + currentBreakPoint.getLineNumbers());
-//			}
-//			
-//		}
-//		
 	}
 	
+	/**
+	 * Searches the visible vars at the location of the request. 
+	 * @param EventRequest : The EventRequest object, cause by the debugger
+	 * @param currentBreakPoint : The breakpoint object that has the same line location
+	 */
 	private void searchVars(Event event, BreakPoint currentBreakPoint) {
-			ThreadReference thread = ((BreakpointEvent) event).thread();
-			StackFrame stackFrame;
+		
+		System.out.println("inside searchVars");
+		
+		// Getting the thread that triggered the request
+		ThreadReference thread = ((BreakpointEvent) event).thread();
+		
+		// Local copy of the jdi stack frame object
+		StackFrame stackFrame;
 		
 		try {
-		
+				// Getting the first frame on the stack of the thread
 				stackFrame = thread.frame(0);
 			
+				// Storing '.this' of the current frame object
 				ObjectReference objRef = stackFrame.thisObject();
 				
 				if (objRef != null)
 				{
+					// Getting the type of class relating to the '.this' object
 					ReferenceType refType = objRef.referenceType();
+					// Getting all of the visible fields
 					List<Field> objFields = refType.allFields();
 					for (int j=0; j<objFields.size(); j++)
 					{
@@ -184,47 +184,6 @@ public class EventHandler extends Thread {
 						}
 				}
 			
-//			
-//			for (int i =0; i < frameCount; i++)
-//			{
-//				
-//				stackFrame = thread.frame(i);
-//				System.out.println("On Stack Frame " + i);
-//				
-//			
-//				Map<LocalVariable, Value> visibleVariables = stackFrame.getValues(stackFrame.visibleVariables());
-//				
-//				for (LocalVariable currentVal : visibleVariables.keySet()) {
-//					System.out.println(currentVal + "Value = " + visibleVariables.get(currentVal) + " Line " + currentBreakPoint.getLineNumbers());
-//				}
-//				
-//				
-//				
-//				for (LocalVariable currentStackVar : visableVars)
-//				{
-//					for (String scriptVar : currentBreakPoint.getVariableName())
-//					{
-//						if (currentStackVar.name().equals(scriptVar))
-//						{
-//							if (currentStackVar instanceof ObjectReference) {
-//								ObjectReference ref = (ObjectReference) currentStackVar;
-//								Method toString = ref.referenceType().methodsByName("toString", "()Ljava/lang/String;").get(0);
-//								try {
-//									debuggee.getLogger().logDebuggeeInfo("Variable Name = " + currentStackVar.name() + " " + "Value = " + ref.invokeMethod(thread, toString, Collections.emptyList(), 0) +  " Line: " + currentBreakPoint.getLineNumbers());
-//
-//								} catch (Exception e) {
-//									debuggee.getLogger().logDebuggerError("Variable = " + currentStackVar.name() + " " + "Did not have a toString method"+ " Line: " + currentBreakPoint.getLineNumbers());
-//									System.out.println("couldnt get toString");
-//								}
-//							}
-//							else {
-//								debuggee.getLogger().logDebuggeeInfo("Variable Name = " + currentStackVar.name() + " " + "Value = " + stackFrame.getValue(currentStackVar) + " Line: " + currentBreakPoint.getLineNumbers());
-//							}
-//						}
-//					}
-//				}
-//			}
-//		
 			} catch (IncompatibleThreadStateException | AbsentInformationException e) {
 				e.printStackTrace();
 			}
