@@ -13,7 +13,7 @@ import functions.ConnectionBundle;
  * @author {Rober Dunsmore, 2718125}
  *
  */
-public class Connection {
+public abstract  class Connection {
 
 	/** Reference to connection information */
 	ConnectionBundle conInfo;

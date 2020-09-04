@@ -3,8 +3,6 @@ package controllers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,10 +37,7 @@ public class MainController {
 	AnchorPane scriptLeftPane, mainPane;
 
 	@FXML
-	TextArea infoArea, scriptArea, actionArea;
-
-	@FXML
-	ListView<String> methodListView;
+	TextArea infoArea, actionArea;
 
 	@FXML
 	Button intoBtnm, uploadBtn, clearBtn, runBtn;
@@ -82,7 +77,6 @@ public class MainController {
 
 	public void reconnect() {
 		conInfo.getCurrentConnection().run();
-		updataActionPane("Debuggee connection restarted.");
 		// infoArea.setText("The connection to the target was restarted");
 		debuggee.getLogger().logDebuggerInfo("Connection to target VM restarted");
 
@@ -91,13 +85,9 @@ public class MainController {
 	public void closeConnection() {
 		debuggee.getVM().exit(0);
 		// infoArea.setText("The connection to the target VM is closed");
-		updataActionPane("Debuggee connection manual closed.");
 		debuggee.getLogger().logDebuggerInfo("Manual disconection for target VM");
 	}
 
-	public void updataActionPane(String msg) {
-		actionArea.setText("\n" + msg);
-	}
 
 	//////////////////////////////////////// Getters
 	//////////////////////////////////////// Setters/////////////////////////////
@@ -139,7 +129,7 @@ public class MainController {
 	}
 
 	/**
-	 * This method is called by the ConnectionConroller when it is read to load the
+	 * This method is called by the ConnectionConroller when it is ready to load the
 	 * main scene. This method is used to pass the connection information from the
 	 * connection controller to the main controller.
 	 * 
@@ -148,7 +138,7 @@ public class MainController {
 	public void setDebuggee(Debuggee debuggee, ConnectionBundle conInfo) {
 
 		this.debuggee = debuggee;
-		this.setConInfo(conInfo);
+		this.conInfo = conInfo;
 
 		if (this.conInfo.getLogLocation() != null) {
 			logger = new Log();
@@ -161,50 +151,7 @@ public class MainController {
 		return script;
 	}
 
-	//////////////////////// method
-	//////////////////////// Pane////////////////////////////////////////////////
-
-	public void displayObjectLineNumbers() throws FileNotFoundException {
-
-		debuggee.getVM().resume();
-
-		eventDispatcher = new EventDispatcher(debuggee, conInfo, 1);
-
-		Thread getLineNumThread = new Thread(eventDispatcher);
-		getLineNumThread.start();
-		try {
-			getLineNumThread.join();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
-			BufferedReader classLineReader = new BufferedReader(new FileReader("classLineNumers.txt"));
-			String line;
-
-			while ((line = classLineReader.readLine()) != null) {
-				String[] test = line.split(",");
-
-				for (String s : test) {
-					infoArea.setText(infoArea.getText() + s + "\n");
-					System.out.println(s);
-				}
-
-			}
-			classLineReader.close();
-
-		} catch (IOException e) {
-			debuggee.getLogger().logDebuggerError("Failed to fetch line numbers : " + e);
-			e.printStackTrace();
-
-		}
-
-		debuggee.getVM().suspend();
-		debuggee.getVM().exit(0);
-		conInfo.getCurrentConnection().run();
-
-	}
+	
 
 	//////////////////////// Script
 	//////////////////////// Pane////////////////////////////////////////////////
@@ -212,11 +159,11 @@ public class MainController {
 	public void clearScript() {
 		if (script != null) {
 			script = null;
-			scriptArea.setText("Script cleared, please upload a new script.");
+			infoArea.setText("Script cleared, please upload a new script.");
 			debuggee.getLogger().logDebuggerInfo("Script cleared successfully.");
 		}
 
-		updataActionPane("Script cleared");
+	
 
 	}
 
@@ -237,7 +184,7 @@ public class MainController {
 
 			if (!fileEx.equals(".xml")) {
 			
-				scriptArea.setText("Invalid file type selected.\n Please select a '.xml' file");
+				infoArea.setText("Invalid file type selected.\n Please select a '.xml' file");
 				UserNotification.information("File selection ", "Select a file",
 						"Please select a valid XML script file that contains at lest one breakpoint, the file extension must end in '.xml'");
 				return;
@@ -258,12 +205,12 @@ public class MainController {
 		}
 
 		if (script != null) {
-			updataActionPane("Script Uploaded");
-			scriptArea.setText("Script uploaded successfully ");
+			
+
 			debuggee.getLogger().logDebuggerInfo("Script uploaded successfully.");
 
 		} else {
-			scriptArea.setText("Script uploaded failed \n Please provide attlest one breakpoint.");
+			infoArea.setText("Script uploaded failed \n Please provide attlest one breakpoint.");
 			debuggee.getLogger().logDebuggerInfo(
 					"Script uploaded failed. Scripts must contain at lest a breakpoint and linenumber tag");
 		}
@@ -276,7 +223,6 @@ public class MainController {
 	 */
 	public void runScript() {
 
-		scriptArea.clear();
 		infoArea.clear();
 		
 		if (!debuggee.isConnected())
@@ -286,10 +232,10 @@ public class MainController {
 		}
 
 		if (script != null) {
-			scriptArea.setText(scriptArea.getText() + "\n" + "Running script");
+			infoArea.setText(infoArea.getText() + "\n" + "Running script");
 			debuggee.getVM().resume();
 
-			eventDispatcher = new EventDispatcher(debuggee, conInfo, script, 0);
+			eventDispatcher = new EventDispatcher(debuggee, script, 0);
 
 			eventDispatcher.start();
 
@@ -311,23 +257,12 @@ public class MainController {
 				}
 			}
 
-			updataActionPane("Debuggee exection finished.");
+			
 
 		} else {
-			scriptArea.setText("Please upload a valid script file.");
+			infoArea.setText("Please upload a valid script file.");
 		}
 
-		if (eventDispatcher.classLineNumFlag) {
-			debuggee.getVM().exit(0);
-			conInfo.getCurrentConnection().run();
-			eventDispatcher.setClassLineNumFlag(false);
-
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 
 	}
 

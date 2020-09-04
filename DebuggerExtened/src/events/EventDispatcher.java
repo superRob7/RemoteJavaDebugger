@@ -23,61 +23,27 @@ public class EventDispatcher extends Thread {
 	/** Instance of Debuggee object */
 	private Debuggee debuggee;
 
-	private ConnectionBundle conInfo;
-	
 	/** Instance of the Event Handler object to handle target VM events */
 	private EventHandler eventHandler;
-
+	
+	/** Instance of the uploaded script object*/
 	private Script script;
 
-	/**
-	 * Flag to determin if line numbers have been located and not breakpoints set.
-	 * -1 (No located, no script) 1 (Located, no script) 2 (located, script)
-	 */	
-	public boolean classLineNumFlag = false;
-	
-	public boolean isClassLineNumFlag() {
-		return classLineNumFlag;
-	}
-
-	public void setClassLineNumFlag(boolean classLineNumFlag) {
-		this.classLineNumFlag = classLineNumFlag;
-	}
 
 	private boolean scriptFlag = false;
 	
-	/**
-	 * 0: startDisppatching
-	 * 1: classNumbers */
-	private int commandFlag = 0;
-	
-	public EventDispatcher(Debuggee debuggee, ConnectionBundle conInfo, Script script,int command) {
+	public EventDispatcher(Debuggee debuggee, Script script,int command) {
 		this.debuggee = debuggee;
-		this.conInfo = conInfo;
 		this.script = script;
-		commandFlag = command;
 	}
 	
-	public EventDispatcher(Debuggee debuggee, ConnectionBundle conInfo, int command) {
+	public EventDispatcher(Debuggee debuggee, int command) {
 		this.debuggee = debuggee;
-		this.conInfo = conInfo;
-		commandFlag = command;
 	}
 	
 
 	public void run() {
-		
-		switch (commandFlag)
-		{
-		case 0:
-			startDispatching();
-			break;
-		case 1:
-			getClassLineNumber();
-			break;
-			
-		}
-		
+		startDispatching();	
 	}
 	
 	
@@ -99,11 +65,7 @@ public class EventDispatcher extends Thread {
 		trackEvents();
 	}
 
-	private void getClassLineNumber() {
-		
-		eventHandler = new EventHandler(debuggee);
-		trackEvents();
-	}
+	
 
 
 	/**
@@ -114,15 +76,11 @@ public class EventDispatcher extends Thread {
 		
 		while (debuggee.isConnected()) {
 			
-			if (classLineNumFlag == false & scriptFlag == false)
+			if (scriptFlag == false)
 			{
 				handleIncomingEvents();
 			}
-			else if (classLineNumFlag == true & scriptFlag == false)
-			{
-				return; 
-			}
-			else if (classLineNumFlag == true & scriptFlag == true) {
+			else if ( scriptFlag == true) {
 				handleIncomingEvents();
 			} else if (scriptFlag){
 				handleIncomingEvents();
@@ -148,13 +106,13 @@ public class EventDispatcher extends Thread {
 			
 			while (iterate.hasNext()) {
 				
-				if (classLineNumFlag == false & scriptFlag == false) {
+				if ( scriptFlag == false) {
 					dispatchEvent(iterate.nextEvent(), eventSet);
-				}else if (classLineNumFlag == true & scriptFlag == false) {
+				}else if (scriptFlag == false) {
 					eventSet.resume();
 					return;
 				}
-				else if (classLineNumFlag == true & scriptFlag == true) {
+				else if (scriptFlag == true) {
 					dispatchEvent(iterate.nextEvent(), eventSet);
 				} else {
 					dispatchEvent(iterate.nextEvent(), eventSet);
@@ -204,7 +162,7 @@ public class EventDispatcher extends Thread {
 			
 			if (script == null) {
 				eventHandler.getClassLineNumber(event);
-				classLineNumFlag = true;
+				
 				return;
 			} else {
 				eventHandler.setBreakpoints(event);

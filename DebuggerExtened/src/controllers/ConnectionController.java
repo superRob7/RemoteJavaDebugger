@@ -185,14 +185,20 @@ public class ConnectionController {
 							+ "\n" + " The file extension must end in '.class'");
 					return;
 				}
+				
+				
 
 				conInfo.setFilePath(filepath);
+				
 				conInfo.setConType(conType);
 				conInfo.setServer(server);
 				conInfo.setSuspend(suspend);
+				
 				con = new ConnectionManager(conInfo);
+				
 				debuggee = con.getDebuggee();
 				con.run();
+				
 
 			} else {
 				// Storing all the connection info to be used when connecting to the
@@ -211,6 +217,7 @@ public class ConnectionController {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			connectInfoArea.setText("Connection to the target VM failed." + "\n" + " Consult the debugger log file");
 			debuggee.getLogger().logDebuggeeError("Connection to the target VM failed." + e.toString());
 		}
