@@ -7,6 +7,7 @@
   - [Listening Connection](#listening-connection)
 - [Uploading A Script](#uploading-a-script)
 - [Links](#links)
+- [Whats To Come](#whats-to-come)
 
 # Overview 
 The premise of the prototype is to encapsulate the best available debugging methods and techniques into one tool. The prototype aims to harness the power and functionality of an IDE debugger, without requiring modification of the source code as well as eradicating irrelevant and unnecessary information, cluttering the user-interface. Essentially creating a hybrid debugging technique. Upon conclusion of the project, the finalised prototype offers the ability to:
@@ -91,4 +92,9 @@ Once a connection has been successful established, the debugger option are avail
   * https://www.oracle.com/java/technologies/javase-jdk8-downloads.html 
 * JavaFX
   * https://openjfx.io/
+  
+  # Whats To Come
+Within this branch, I hope to add the ability to for the debugger to set particular variables. This will be accomplished by modifying the script to identify variables and their desired value. Allowing the debugger to set their variables.
+
+Once this feature is implemented the ability to evaluate variables before determining wither to set the desired variable. For example, a variable could be marked to be set to a particular value only when an additional variable is equal to a particular value, such as a loop counter or any other variable.
 
